@@ -47,7 +47,8 @@ class Board
     end
 
     def update_board(col, player)
-        if check_col(col - 1)
+        unless check_col(col - 1)
+            puts @board[0][col - 1]
             puts 'Invalid move bruh'
             return false
         end
@@ -62,7 +63,7 @@ class Board
     def check_winner
         if check_horizontal[0]
             check_horizontal
-        elsif check_vertical
+        elsif check_vertical[0]
             check_vertical
         else 
             check_diagonal
@@ -133,10 +134,10 @@ class Board
         42.times do |index|
             puts self.print
             input = get_input(players[index % 2])
-            p check_col(input)
-            if check_col(input)
-                update_board(input, players[index % 2])
+            until check_col(input)
+                input = get_input(players[index % 2])
             end
+            update_board(input, players[index % 2])
             a, b = check_winner
             if a
                 puts "Congrats, #{players[b].name}, you win the game!"
