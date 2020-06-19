@@ -145,6 +145,7 @@ class Board
                 return
             end
         end
+        puts 'Its a tie'
     end
 end
 
